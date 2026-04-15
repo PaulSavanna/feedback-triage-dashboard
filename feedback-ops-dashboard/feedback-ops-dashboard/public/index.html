@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback Ops Dashboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <span class="pill">Express • Feedback triage • Searchable backlog • Exportable report</span>
+        <div class="hero-grid">
+          <div>
+            <h1>Feedback Ops Dashboard</h1>
+            <p>
+              Internal tooling for turning messy customer feedback into a prioritized backlog.
+              The first run bootstraps a realistic demo dataset so reviewers can inspect workflow state,
+              prioritization, and filtering without manual setup.
+            </p>
+          </div>
+          <div class="hero-note">
+            <strong>Compact by design</strong>
+            <p>Local persistence, deterministic scoring, and filter-aware Markdown export keep the flow inspectable end to end.</p>
+          </div>
+        </div>
+      </section>
+
+      <p id="appMessage" class="message meta" aria-live="polite"></p>
+      <section class="grid metrics" id="metrics" aria-live="polite"></section>
+
+      <section class="grid layout">
+        <div class="card accent-card">
+          <div class="card-head">
+            <div>
+              <h2>Add feedback</h2>
+              <p class="meta">Source values are explicit so prioritization rules stay predictable.</p>
+            </div>
+            <span class="meta">Minimum 12 characters</span>
+          </div>
+
+          <form id="feedbackForm" novalidate>
+            <div class="field">
+              <label for="feedbackText">Feedback note</label>
+              <textarea
+                id="feedbackText"
+                name="feedbackText"
+                placeholder="Example: Mobile users get stuck on the import step and think the upload is broken."
+              ></textarea>
+            </div>
+
+            <div class="row compact form-row">
+              <div class="field source-field">
+                <label for="sourceInput">Source</label>
+                <select id="sourceInput" name="sourceInput">
+                  <option value="manual">Manual review</option>
+                  <option value="sales">Sales</option>
+                  <option value="support">Support</option>
+                  <option value="demo">Demo session</option>
+                  <option value="churn">Churn risk</option>
+                  <option value="enterprise">Enterprise</option>
+                  <option value="vip">VIP</option>
+                </select>
+              </div>
+              <div class="field action-field">
+                <span class="label-spacer" aria-hidden="true">Action</span>
+                <button id="submitBtn" type="submit">Capture feedback</button>
+              </div>
+            </div>
+            <p id="formMessage" class="message meta" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h2>Top issues</h2>
+              <p class="meta">Summary, ranking, and export follow the current filters.</p>
+            </div>
+            <a id="exportLink" class="link-button" href="/api/export.md">Export current view</a>
+          </div>
+          <ul id="topIssues" class="issue-list"></ul>
+          <div id="highlights" class="highlights"></div>
+        </div>
+      </section>
+
+      <section class="card backlog-card">
+        <div class="toolbar">
+          <div>
+            <h2>Feedback backlog</h2>
+            <p class="meta">Filter by source, category, priority, status or free-text query.</p>
+          </div>
+          <div class="row compact filters-row">
+            <div class="field filter-field">
+              <label for="sourceFilter">Source</label>
+              <select id="sourceFilter">
+                <option value="">All sources</option>
+                <option value="manual">Manual review</option>
+                <option value="sales">Sales</option>
+                <option value="support">Support</option>
+                <option value="demo">Demo session</option>
+                <option value="churn">Churn risk</option>
+                <option value="enterprise">Enterprise</option>
+                <option value="vip">VIP</option>
+              </select>
+            </div>
+            <div class="field filter-field">
+              <label for="categoryFilter">Category</label>
+              <select id="categoryFilter">
+                <option value="">All categories</option>
+                <option value="bug">Bug</option>
+                <option value="ux">UX</option>
+                <option value="feature">Feature</option>
+                <option value="support">Support</option>
+              </select>
+            </div>
+            <div class="field filter-field">
+              <label for="priorityFilter">Priority</label>
+              <select id="priorityFilter">
+                <option value="">All priorities</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="field filter-field">
+              <label for="statusFilter">Status</label>
+              <select id="statusFilter">
+                <option value="">All statuses</option>
+                <option value="new">New</option>
+                <option value="reviewing">Reviewing</option>
+                <option value="planned">Planned</option>
+                <option value="shipped">Shipped</option>
+              </select>
+            </div>
+            <div class="field query-field">
+              <label for="queryInput">Search</label>
+              <input id="queryInput" placeholder="Search text or source" />
+            </div>
+            <div class="field action-field">
+              <span class="label-spacer" aria-hidden="true">Action</span>
+              <button id="refreshBtn" class="secondary" type="button">Refresh</button>
+            </div>
+          </div>
+        </div>
+        <div id="feedbackList" class="list"></div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
