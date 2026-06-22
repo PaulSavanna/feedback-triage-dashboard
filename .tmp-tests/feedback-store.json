@@ -1,0 +1,38 @@
+{
+  "feedback": [
+    {
+      "id": "cdee0937-ce1d-4849-8197-f952ec6935e6",
+      "text": "Support needs a simpler export for weekly notes.",
+      "summary": "Support needs a simpler export for weekly notes.",
+      "source": "support",
+      "category": "feature",
+      "priority": "medium",
+      "status": "new",
+      "statusUpdatedAt": "2026-06-22T14:19:00.477Z",
+      "signals": {
+        "mentionsMobile": false,
+        "mentionsBilling": false,
+        "mentionsImportExport": true,
+        "mentionsBlocking": false
+      },
+      "createdAt": "2026-06-22T14:19:00.477Z"
+    },
+    {
+      "id": "abb63855-58d7-47fe-9418-3bec9ff9582f",
+      "text": "Mobile import is broken for customers and blocks setup.",
+      "summary": "Mobile import is broken for customers and blocks setup.",
+      "source": "sales",
+      "category": "bug",
+      "priority": "high",
+      "status": "new",
+      "statusUpdatedAt": "2026-06-22T14:19:00.470Z",
+      "signals": {
+        "mentionsMobile": true,
+        "mentionsBilling": false,
+        "mentionsImportExport": true,
+        "mentionsBlocking": false
+      },
+      "createdAt": "2026-06-22T14:19:00.470Z"
+    }
+  ]
+}
